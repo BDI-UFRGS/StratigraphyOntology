@@ -7,7 +7,8 @@
 @base <https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology> .
 
 <https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology> rdf:type owl:Ontology ;
-                                                                owl:imports <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology> ;
+                                                                owl:imports <https://www.inf.ufrgs.br/bdi/ontologies/geologicalspatialrelationsontology/1.0> ,
+                                                                            <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology> ;
                                                                 <http://purl.org/dc/elements/1.1/contributor> "Luan Fonseca Garcia" .
 
 #################################################################
@@ -46,7 +47,17 @@
                                           [ rdf:type owl:Restriction ;
                                             owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000050> ;
                                             owl:someValuesFrom :StratigraphyOntology_member
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_constituted_by> ;
+                                            owl:someValuesFrom <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_rock>
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty <https://www.inf.ufrgs.br/bdi/ontologies/geologicalspatialrelationsontology#UFRGS:GeologicalSpatialRelationsOntology_proper_spatial_part_of> ;
+                                            owl:someValuesFrom :StratigraphyOntology_member
                                           ] ;
+                          <http://purl.obolibrary.org/obo/IAO_0000115> "A bed is the smallest fromal lithostratigraphic unit of sedimentary rocks."@en ;
+                          <http://purl.obolibrary.org/obo/IAO_0000119> "North American Stratigraphic Code"@en ;
                           rdfs:label "bed"@en .
 
 
@@ -72,7 +83,17 @@
                                            [ rdf:type owl:Restriction ;
                                              owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000050> ;
                                              owl:someValuesFrom :StratigraphyOntology_member
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty <https://www.inf.ufrgs.br/bdi/ontologies/geologicalspatialrelationsontology#UFRGS:GeologicalSpatialRelationsOntology_proper_spatial_part_of> ;
+                                             owl:someValuesFrom :StratigraphyOntology_member
+                                           ] ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_constituted_by> ;
+                                             owl:allValuesFrom <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_rock>
                                            ] ;
+                           <http://purl.obolibrary.org/obo/IAO_0000115> "A flow is the smallest formal lithostratigraphic unit of volcanic flow rocks."@en ;
+                           <http://purl.obolibrary.org/obo/IAO_0000119> "North American Stratigraphic Code"@en ;
                            rdfs:label "flow"@en .
 
 
@@ -152,8 +173,21 @@
                                              [ rdf:type owl:Restriction ;
                                                owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000050> ;
                                                owl:someValuesFrom :StratigraphyOntology_formation
+                                             ] ,
+                                             [ rdf:type owl:Restriction ;
+                                               owl:onProperty <https://www.inf.ufrgs.br/bdi/ontologies/geologicalspatialrelationsontology#UFRGS:GeologicalSpatialRelationsOntology_proper_spatial_part_of> ;
+                                               owl:someValuesFrom :StratigraphyOntology_formation
                                              ] ;
+                             <http://purl.obolibrary.org/obo/IAO_0000115> "A member is the formal lithostratigraphic unit next in rank below a formation. It is recognized as a named entity within a formation because it possesses characteristics distinguishing it from adjacent parts of the formation."@en ;
+                             <http://purl.obolibrary.org/obo/IAO_0000116> "A member is always part of some formation, but a formatio need not to be divided into members."@en ;
+                             <http://purl.obolibrary.org/obo/IAO_0000119> "North American Stratigraphic Code"@en ;
                              rdfs:label "member"@en .
+
+
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_pedostratigraphic_unit
+:StratigraphyOntology_pedostratigraphic_unit rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_geological_object> ;
+                                             rdfs:label "pedostratigraphic unit"@en .
 
 
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_sorting
@@ -194,11 +228,6 @@
                               rdfs:label "texture"@en .
 
 
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_pedostratigraphic_unit
-:StratigraphyOntology_pedostratigraphic_unit rdf:type owl:Class ;
-                                             rdfs:subClassOf <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_geological_object> .
-
-
 #################################################################
 #    General axioms
 #################################################################
@@ -207,6 +236,15 @@
   owl:members ( :StratigraphyOntology_allostratigraphic_unit
                 :StratigraphyOntology_lithodemic_unit
                 :StratigraphyOntology_lithostratigraphic_unit
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :StratigraphyOntology_allostratigraphic_unit
+                :StratigraphyOntology_lithodemic_unit
+                :StratigraphyOntology_lithostratigraphic_unit
+                :StratigraphyOntology_pedostratigraphic_unit
               )
 ] .
 
