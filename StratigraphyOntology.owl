@@ -7,11 +7,26 @@
 @base <https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology> .
 
 <https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology> rdf:type owl:Ontology ;
-                                                                owl:imports <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology> .
+                                                                owl:imports <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology> ;
+                                                                <http://purl.org/dc/elements/1.1/contributor> "Luan Fonseca Garcia" .
 
 #################################################################
 #    Classes
 #################################################################
+
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntologi_lithofacies_association
+:StratigraphyOntologi_lithofacies_association rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0002351> ;
+                                                                owl:someValuesFrom :StratigraphyOntology_lithofacies
+                                                              ] ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0002351> ;
+                                                                owl:allValuesFrom :StratigraphyOntology_lithofacies
+                                                              ] ;
+                                              rdfs:label "lithofacies association"@en .
+
 
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_allostratigraphic_unit
 :StratigraphyOntology_allostratigraphic_unit rdf:type owl:Class ;
@@ -41,6 +56,16 @@
                                             rdfs:label "biostratigraphic unit"@en .
 
 
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_color
+:StratigraphyOntology_color rdf:type owl:Class ;
+                            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ,
+                                            [ rdf:type owl:Restriction ;
+                                              owl:onProperty <http://purl.obolibrary.org/obo/RO_0000080> ;
+                                              owl:someValuesFrom :StratigraphyOntology_lithostratigraphic_unit
+                                            ] ;
+                            rdfs:label "color"@en .
+
+
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_flow
 :StratigraphyOntology_flow rdf:type owl:Class ;
                            rdfs:subClassOf :StratigraphyOntology_lithostratigraphic_unit ,
@@ -54,6 +79,9 @@
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_formation
 :StratigraphyOntology_formation rdf:type owl:Class ;
                                 rdfs:subClassOf :StratigraphyOntology_lithostratigraphic_unit ;
+                                <http://purl.obolibrary.org/obo/IAO_0000115> "A formation is a body of rock identified by lithic characcteristics and stratigraphic position; it is prevailingly but not necessarily tabular and is mappable at the Earth's surface or traceable in the subsurface."@en ;
+                                <http://purl.obolibrary.org/obo/IAO_0000116> "Formations are the basic lithostratigraphic units used in describing and interpreting the geology of a region. The limits of a formation normally are those surfaces of lithic change that give it the greatest practicable unity of constitution. A formation may represent a long or short time interval, may be ccomposed of materials from one or several sources, and may include breaks in deposition."@en ;
+                                <http://purl.obolibrary.org/obo/IAO_0000119> "North American Stratigraphic Code"@en ;
                                 rdfs:label "formation"@en .
 
 
@@ -78,6 +106,24 @@
                                       rdfs:label "lithodemic unit"@en .
 
 
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_lithofacies
+:StratigraphyOntology_lithofacies rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
+                                                    owl:someValuesFrom :StratigraphyOntology_color
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
+                                                    owl:someValuesFrom :StratigraphyOntology_sorting
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
+                                                    owl:someValuesFrom :StratigraphyOntology_texture
+                                                  ] ;
+                                  rdfs:label "lithofacies"@en .
+
+
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_lithostratigraphic_unit
 :StratigraphyOntology_lithostratigraphic_unit rdf:type owl:Class ;
                                               rdfs:subClassOf <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_geological_object> ,
@@ -93,7 +139,9 @@
                                                                 owl:onProperty <http://purl.obolibrary.org/obo/RO_0000086> ;
                                                                 owl:someValuesFrom :StratigraphyOntology_texture
                                                               ] ;
-                                              <http://purl.obolibrary.org/obo/IAO_0000115> "A lithostratigraphic unit is a defined body of sedimentary, extrusive igneous, metasedimentary, or metavolcanic strata that is distinguished and delimited on the basis of lithic characteristics and stratigraphic position. A lithostratigraphic unit generally conforms to the Law of Superposition and commonly is stratified and tabular in form."@en ;
+                                              <http://purl.obolibrary.org/obo/IAO_0000115> "A lithostratigraphic unit is a defined body of sedimentary, extrusive igneous, metasedimentary, or metavolcanic strata that is distinguished and delimited on the basis of lithic characteristics and stratigraphic position. A lithostratigraphic unit generally conforms to the Law of Superposition and commonly is stratified and in tabular in form."@en ;
+                                              <http://purl.obolibrary.org/obo/IAO_0000116> "Boundaries - The boundaries of lithostratigraphic units are placed at positions of lithic change. Boundaries are placed at distinct contacts or may be selected at some arbitrary level within zones of gradation. Both vertical and lateral boundaries are based on the lithic criteria that provide the greatest unity and utility."@en ,
+                                                                                           "Independence from time concepts - The boundaries of most lithostratigraphic units are time independent, but some may be approximately synchronous."@en ;
                                               <http://purl.obolibrary.org/obo/IAO_0000119> "North American Stratigraphic Code"@en ;
                                               rdfs:label "lithostratigraphic unit"@en .
 
@@ -106,6 +154,16 @@
                                                owl:someValuesFrom :StratigraphyOntology_formation
                                              ] ;
                              rdfs:label "member"@en .
+
+
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_sorting
+:StratigraphyOntology_sorting rdf:type owl:Class ;
+                              rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0000080> ;
+                                                owl:someValuesFrom :StratigraphyOntology_lithostratigraphic_unit
+                                              ] ;
+                              rdfs:label "sorting"@en .
 
 
 ###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_supergroup
@@ -126,59 +184,7 @@
                                  rdfs:label "supergroup"@en .
 
 
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntologi_lithofacies_association
-:StratigraphyOntologi_lithofacies_association rdf:type owl:Class ;
-                                              rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0002351> ;
-                                                                owl:someValuesFrom :StratigraphyOntology_lithofacies
-                                                              ] ,
-                                                              [ rdf:type owl:Restriction ;
-                                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0002351> ;
-                                                                owl:allValuesFrom :StratigraphyOntology_lithofacies
-                                                              ] ;
-                                              rdfs:label "lithofacies association"@en .
-
-
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_color
-:StratigraphyOntology_color rdf:type owl:Class ;
-                            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ,
-                                            [ rdf:type owl:Restriction ;
-                                              owl:onProperty <http://purl.obolibrary.org/obo/RO_0000080> ;
-                                              owl:someValuesFrom :StratigraphyOntology_lithostratigraphic_unit
-                                            ] ;
-                            rdfs:label "color"@en .
-
-
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_lithofacies
-:StratigraphyOntology_lithofacies rdf:type owl:Class ;
-                                  rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000031> ,
-                                                  [ rdf:type owl:Restriction ;
-                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
-                                                    owl:someValuesFrom :StratigraphyOntology_color
-                                                  ] ,
-                                                  [ rdf:type owl:Restriction ;
-                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
-                                                    owl:someValuesFrom :StratigraphyOntology_sorting
-                                                  ] ,
-                                                  [ rdf:type owl:Restriction ;
-                                                    owl:onProperty <http://purl.obolibrary.org/obo/RO_0000058> ;
-                                                    owl:someValuesFrom :StratigraphyOntology_texture
-                                                  ] ;
-                                  rdfs:label "lithofacies"@en .
-
-
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_sorting
-:StratigraphyOntology_sorting rdf:type owl:Class ;
-                              rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ,
-                                              [ rdf:type owl:Restriction ;
-                                                owl:onProperty <http://purl.obolibrary.org/obo/RO_0000080> ;
-                                                owl:someValuesFrom :StratigraphyOntology_lithostratigraphic_unit
-                                              ] ;
-                              rdfs:label "sorting"@en .
-
-
-###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_texture
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#StratigraphyOntology_texture
 :StratigraphyOntology_texture rdf:type owl:Class ;
                               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ,
                                               [ rdf:type owl:Restriction ;
@@ -186,6 +192,11 @@
                                                 owl:someValuesFrom :StratigraphyOntology_lithostratigraphic_unit
                                               ] ;
                               rdfs:label "texture"@en .
+
+
+###  https://www.inf.ufrgs.br/bdi/ontologies/stratigraphyontology#UFRGS:StratigraphyOntology_pedostratigraphic_unit
+:StratigraphyOntology_pedostratigraphic_unit rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://www.inf.ufrgs.br/bdi/ontologies/geocoreontology#UFRGS:GeoCoreOntology_geological_object> .
 
 
 #################################################################
